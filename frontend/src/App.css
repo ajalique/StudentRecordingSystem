@@ -48,10 +48,12 @@ body {
 ul {
   padding-left: 550px; /* Adjust overall indentation */
   list-style-position: outside; /* Keeps bullets outside but close */
+  text-align: center;
 }
 
 li {
   padding-left: -550px; /* Slightly moves text away from bullets */
   text-indent: -550px; /* Fine-tunes spacing between bullet and text */
+  text-align: center;
 }
 

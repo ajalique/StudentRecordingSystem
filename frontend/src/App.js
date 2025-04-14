@@ -14,30 +14,26 @@ const App = () => {
   }, []);
 
   const fetchStudents = async () => {
-    try {
-      const response = await axios.get("http://127.0.0.1:5000/api/students");
-      setStudents(response.data);
-    } catch (error) {
-      console.error("Error fetching students:", error);
-    }
+    const response = await axios.get("http://localhost:5000/api/students");
+    setStudents(response.data);
   };
 
-  // Add student and update list
-  const addStudent = async (name, course) => {
-    try {
-      await axios.post("http://127.0.0.1:5000/api/students", { name, course });
-      fetchStudents(); // Refresh student list immediately
-    } catch (error) {
-      console.error("Error adding student:", error);
-    }
+  const addStudent = async (formData) => {
+    await axios.post("http://localhost:5000/api/students", formData);
+    fetchStudents();
+  };
+
+  const deleteStudent = async (id) => {
+    await axios.delete(`http://localhost:5000/api/students/${id}`);
+    fetchStudents();
   };
 
   return (
-    <div className="container">
-  <h1>Student Recording System</h1>
-  <StudentForm addStudent={addStudent} />
-  <StudentList students={students} />
-</div>
+    <div className="container text-center">
+      <h1>Student Recording System</h1>
+      <StudentForm addStudent={addStudent} />
+      <StudentList students={students} deleteStudent={deleteStudent} />
+    </div>
   );
 };
 
